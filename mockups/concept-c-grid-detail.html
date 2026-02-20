@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectors - Concept C: Grid + Detail Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dashicons/0.9.0/css/dashicons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background: #F0F0F1;
+            color: #1D2327;
+            overflow-x: hidden;
+        }
+
+        /* Admin Bar */
+        .wp-admin-bar {
+            background: #1D2327;
+            height: 32px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .wp-admin-sidebar {
+            background: #1D2327;
+            width: 160px;
+            height: calc(100vh - 32px);
+            position: fixed;
+            top: 32px;
+            left: 0;
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .wp-admin-sidebar ul {
+            list-style: none;
+        }
+
+        .wp-admin-sidebar li {
+            margin-bottom: 2px;
+        }
+
+        .wp-admin-sidebar a {
+            display: block;
+            color: #F0F0F1;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 13px;
+            transition: background 0.15s ease;
+        }
+
+        .wp-admin-sidebar a:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .wp-admin-sidebar .active {
+            background: #2271B1 !important;
+        }
+
+        .wp-admin-sidebar .submenu {
+            padding-left: 12px;
+        }
+
+        .wp-admin-sidebar .submenu a {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Main Content Area */
+        .wp-admin-content {
+            margin-left: 160px;
+            margin-top: 32px;
+            height: calc(100vh - 32px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 32px 20px 24px 20px;
+            background: #F0F0F1;
+        }
+
+        .page-header h1 {
+            font-size: 23px;
+            font-weight: 400;
+            color: #1D2327;
+        }
+
+        /* Content Layout */
+        .content-layout {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* Filter Sidebar */
+        .filter-sidebar {
+            width: 200px;
+            background: white;
+            border-right: 1px solid #E0E0E0;
+            padding: 24px 0;
+        }
+
+        .filter-section {
+            margin-bottom: 32px;
+        }
+
+        .filter-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #646970;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            padding: 0 20px;
+        }
+
+        .filter-list {
+            list-style: none;
+        }
+
+        .filter-item {
+            margin-bottom: 2px;
+        }
+
+        .filter-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            color: #1D2327;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .filter-link:hover {
+            background: #F9F9F9;
+        }
+
+        .filter-link.active {
+            background: rgba(34, 113, 177, 0.08);
+            color: #2271B1;
+            border-right: 3px solid #2271B1;
+        }
+
+        .filter-count {
+            font-size: 12px;
+            color: #646970;
+            background: #F0F0F1;
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+
+        .filter-link.active .filter-count {
+            background: rgba(34, 113, 177, 0.15);
+            color: #2271B1;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* Connector Grid */
+        .connectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .connector-card {
+            background: white;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .connector-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .connector-card.connected {
+            border-left: 3px solid #00A32A;
+        }
+
+        .connector-card.unconfigured {
+            border-style: dashed;
+            border-color: #C3C4C7;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .card-icon-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .connector-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .openai { background: #10A37F; }
+        .anthropic { background: #D97757; }
+        .google { background: #4285F4; }
+        .openrouter { background: #9333EA; }
+        .grok { background: #000000; }
+        .akismet { background: #1E73BE; }
+
+        .connector-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1D2327;
+        }
+
+        .plugin-badge {
+            font-size: 9px;
+            color: #646970;
+            background: #F0F0F1;
+            padding: 2px 5px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .connector-description {
+            font-size: 13px;
+            color: #646970;
+            line-height: 1.4;
+            margin-bottom: 16px;
+            height: 34px;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .manage-link {
+            color: #2271B1;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .manage-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #C3C4C7;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #2271B1;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Detail Panel */
+        .detail-panel {
+            position: fixed;
+            top: 32px;
+            right: -400px;
+            width: 400px;
+            height: calc(100vh - 32px);
+            background: white;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-panel.show {
+            right: 0;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .detail-title-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .detail-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1D2327;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #646970;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 2px;
+            transition: background 0.15s ease;
+        }
+
+        .close-btn:hover {
+            background: #F0F0F1;
+        }
+
+        .detail-content {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .detail-field {
+            margin-bottom: 20px;
+        }
+
+        .detail-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1D2327;
+            margin-bottom: 6px;
+        }
+
+        .detail-field input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #C3C4C7;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: Consolas, Monaco, 'Courier New', monospace;
+        }
+
+        .detail-field input:focus {
+            border-color: #2271B1;
+            outline: none;
+            box-shadow: 0 0 0 1px #2271B1;
+        }
+
+        .detail-description {
+            font-size: 13px;
+            color: #646970;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .detail-description a {
+            color: #2271B1;
+            text-decoration: none;
+        }
+
+        .detail-description a:hover {
+            text-decoration: underline;
+        }
+
+        .detail-actions {
+            padding: 20px 24px;
+            border-top: 1px solid #E0E0E0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .primary-btn {
+            background: #2271B1;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .primary-btn:hover {
+            background: #135E96;
+        }
+
+        .secondary-btn {
+            background: white;
+            border: 1px solid #C3C4C7;
+            color: #50575E;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .secondary-btn:hover {
+            border-color: #8C8F94;
+        }
+
+        .danger-link {
+            color: #D63638;
+            text-decoration: none;
+            font-size: 13px;
+            margin-left: auto;
+            align-self: center;
+        }
+
+        .danger-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Panel Overlay */
+        .panel-overlay {
+            position: fixed;
+            top: 32px;
+            left: 160px;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 150;
+        }
+
+        .panel-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Bar -->
+    <div class="wp-admin-bar"></div>
+
+    <!-- Sidebar -->
+    <div class="wp-admin-sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Posts</a></li>
+            <li><a href="#">Media</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Comments</a></li>
+            <li>
+                <a href="#" class="active">Settings</a>
+                <ul class="submenu">
+                    <li><a href="#">General</a></li>
+                    <li><a href="#" style="color: white;">Connectors</a></li>
+                    <li><a href="#">Writing</a></li>
+                    <li><a href="#">Reading</a></li>
+                    <li><a href="#">Discussion</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Permalinks</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="wp-admin-content">
+        <div class="page-header">
+            <h1>Connectors</h1>
+        </div>
+
+        <div class="content-layout">
+            <!-- Filter Sidebar -->
+            <div class="filter-sidebar">
+                <div class="filter-section">
+                    <div class="filter-title">Categories</div>
+                    <ul class="filter-list">
+                        <li class="filter-item">
+                            <a href="#" class="filter-link active" data-filter="all">
+                                All Connectors
+                                <span class="filter-count">6</span>
+                            </a>
+                        </li>
+                        <li class="filter-item">
+                            <a href="#" class="filter-link" data-filter="ai">
+                                AI Providers
+                                <span class="filter-count">5</span>
+                            </a>
+                        </li>
+                        <li class="filter-item">
+                            <a href="#" class="filter-link" data-filter="plugin">
+                                Plugin Services
+                                <span class="filter-count">1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div class="connectors-grid">
+                    <!-- OpenAI -->
+                    <div class="connector-card connected" data-category="ai">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon openai">O</div>
+                                <div class="connector-name">OpenAI</div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Access GPT models, DALL-E, and other OpenAI services for advanced AI capabilities.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('openai')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Anthropic -->
+                    <div class="connector-card connected" data-category="ai">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon anthropic">A</div>
+                                <div class="connector-name">Anthropic</div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Access Claude models for advanced AI assistance with strong reasoning capabilities.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('anthropic')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Google -->
+                    <div class="connector-card unconfigured" data-category="ai">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon google">G</div>
+                                <div class="connector-name">Google</div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Access Gemini models and Google AI services for diverse AI applications.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('google')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- OpenRouter -->
+                    <div class="connector-card unconfigured" data-category="ai">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon openrouter">O</div>
+                                <div class="connector-name">OpenRouter</div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Access multiple AI models through a unified API with competitive pricing.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('openrouter')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Grok -->
+                    <div class="connector-card unconfigured" data-category="ai">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon grok">G</div>
+                                <div class="connector-name">Grok</div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Access X.AI's Grok models for real-time AI assistance with up-to-date information.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('grok')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Akismet -->
+                    <div class="connector-card connected" data-category="plugin">
+                        <div class="card-header">
+                            <div class="card-icon-name">
+                                <div class="connector-icon akismet">A</div>
+                                <div class="connector-name">
+                                    Akismet
+                                    <span class="plugin-badge">Plugin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="connector-description">
+                            Spam protection for comments and contact forms with machine learning detection.
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="manage-link" onclick="openPanel('akismet')">Manage</a>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Overlay -->
+    <div class="panel-overlay" onclick="closePanel()"></div>
+
+    <!-- Detail Panel -->
+    <div class="detail-panel" id="detailPanel">
+        <div class="detail-header">
+            <div class="detail-title-section">
+                <div class="connector-icon openai" id="panelIcon">O</div>
+                <div class="detail-title" id="panelTitle">OpenAI</div>
+            </div>
+            <button class="close-btn" onclick="closePanel()">×</button>
+        </div>
+        
+        <div class="detail-content">
+            <div class="detail-field">
+                <label>API Key</label>
+                <input type="password" id="panelApiKey" placeholder="Enter your API key">
+            </div>
+            
+            <div class="detail-description" id="panelDescription">
+                Get your API key at <a href="#" id="panelLink">platform.openai.com/api-keys</a>. 
+                Keep your API key secure and never share it publicly.
+            </div>
+        </div>
+        
+        <div class="detail-actions">
+            <button class="primary-btn">Save</button>
+            <button class="secondary-btn">Test Connection</button>
+            <a href="#" class="danger-link" id="disconnectLink">Disconnect</a>
+        </div>
+    </div>
+
+    <script>
+        const connectorData = {
+            openai: {
+                name: 'OpenAI',
+                icon: 'openai',
+                iconText: 'O',
+                apiKey: 'sk-••••••••••••••••••••••••••••••••••••••••••••••',
+                link: 'platform.openai.com/api-keys',
+                description: 'Get your API key at <a href="#">platform.openai.com/api-keys</a>. Keep your API key secure and never share it publicly.',
+                connected: true
+            },
+            anthropic: {
+                name: 'Anthropic',
+                icon: 'anthropic',
+                iconText: 'A',
+                apiKey: 'sk-ant-••••••••••••••••••••••••••••••••••••••••••••',
+                link: 'console.anthropic.com',
+                description: 'Get your API key at <a href="#">console.anthropic.com</a>. Your API key provides access to Claude models.',
+                connected: true
+            },
+            google: {
+                name: 'Google',
+                icon: 'google',
+                iconText: 'G',
+                apiKey: '',
+                link: 'aistudio.google.com/app/apikey',
+                description: 'Get your API key at <a href="#">aistudio.google.com/app/apikey</a>. Enable the required APIs in Google Cloud Console.',
+                connected: false
+            },
+            openrouter: {
+                name: 'OpenRouter',
+                icon: 'openrouter',
+                iconText: 'O',
+                apiKey: '',
+                link: 'openrouter.ai/keys',
+                description: 'Get your API key at <a href="#">openrouter.ai/keys</a>. OpenRouter provides access to multiple AI models.',
+                connected: false
+            },
+            grok: {
+                name: 'Grok',
+                icon: 'grok',
+                iconText: 'G',
+                apiKey: '',
+                link: 'x.ai/api',
+                description: 'Get your API key at <a href="#">x.ai/api</a>. Grok provides real-time AI assistance with current information.',
+                connected: false
+            },
+            akismet: {
+                name: 'Akismet',
+                icon: 'akismet',
+                iconText: 'A',
+                apiKey: '••••••••••••••••••••••••••••••••••••',
+                link: '#',
+                description: 'This connection is managed by the Akismet plugin. API key configuration is handled through the plugin settings.',
+                connected: true,
+                isPlugin: true
+            }
+        };
+
+        function openPanel(connectorId) {
+            const connector = connectorData[connectorId];
+            if (!connector) return;
+
+            document.getElementById('panelTitle').textContent = connector.name;
+            document.getElementById('panelIcon').textContent = connector.iconText;
+            document.getElementById('panelIcon').className = `connector-icon ${connector.icon}`;
+            document.getElementById('panelApiKey').value = connector.apiKey;
+            document.getElementById('panelDescription').innerHTML = connector.description;
+            
+            const disconnectLink = document.getElementById('disconnectLink');
+            if (connector.connected && !connector.isPlugin) {
+                disconnectLink.style.display = 'block';
+            } else {
+                disconnectLink.style.display = 'none';
+            }
+
+            document.getElementById('detailPanel').classList.add('show');
+            document.querySelector('.panel-overlay').classList.add('show');
+        }
+
+        function closePanel() {
+            document.getElementById('detailPanel').classList.remove('show');
+            document.querySelector('.panel-overlay').classList.remove('show');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active filter
+                document.querySelectorAll('.filter-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const cards = document.querySelectorAll('.connector-card');
+                
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Close panel with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePanel();
+            }
+        });
+    </script>
+</body>
+</html>

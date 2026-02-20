@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectors - Concept A: Card List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dashicons/0.9.0/css/dashicons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background: #F0F0F1;
+            color: #1D2327;
+        }
+
+        /* Admin Bar */
+        .wp-admin-bar {
+            background: #1D2327;
+            height: 32px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .wp-admin-sidebar {
+            background: #1D2327;
+            width: 160px;
+            height: calc(100vh - 32px);
+            position: fixed;
+            top: 32px;
+            left: 0;
+            padding: 12px 0;
+        }
+
+        .wp-admin-sidebar ul {
+            list-style: none;
+        }
+
+        .wp-admin-sidebar li {
+            margin-bottom: 2px;
+        }
+
+        .wp-admin-sidebar a {
+            display: block;
+            color: #F0F0F1;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 13px;
+            transition: background 0.15s ease;
+        }
+
+        .wp-admin-sidebar a:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .wp-admin-sidebar .active {
+            background: #2271B1 !important;
+        }
+
+        .wp-admin-sidebar .submenu {
+            padding-left: 12px;
+        }
+
+        .wp-admin-sidebar .submenu a {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .wp-admin-content {
+            margin-left: 160px;
+            margin-top: 32px;
+            padding: 32px 20px;
+            max-width: 1200px;
+        }
+
+        /* Page Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 32px;
+        }
+
+        .page-header h1 {
+            font-size: 23px;
+            font-weight: 400;
+            color: #1D2327;
+            margin-bottom: 8px;
+        }
+
+        .page-header .description {
+            color: #50575E;
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .browse-btn {
+            background: white;
+            border: 1px solid #2271B1;
+            color: #2271B1;
+            padding: 8px 14px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .browse-btn:hover {
+            background: #2271B1;
+            color: white;
+        }
+
+        /* Connector Cards */
+        .connectors-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .connector-card {
+            background: white;
+            border: 1px solid #C3C4C7;
+            border-radius: 4px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.15s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .connector-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .connector-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .openai { background: #10A37F; }
+        .anthropic { background: #D97757; }
+        .google { background: #4285F4; }
+        .openrouter { background: #9333EA; }
+        .grok { background: #000000; }
+        .akismet { background: #1E73BE; }
+
+        .connector-info {
+            flex: 1;
+        }
+
+        .connector-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1D2327;
+            margin-bottom: 4px;
+        }
+
+        .connector-description {
+            font-size: 13px;
+            color: #646970;
+            line-height: 1.4;
+        }
+
+        .connector-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-badge {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+
+        .status-connected {
+            color: #2271B1;
+            background: rgba(34, 113, 177, 0.1);
+        }
+
+        .status-error {
+            color: #D63638;
+            background: rgba(214, 54, 56, 0.1);
+        }
+
+        .connect-btn {
+            background: white;
+            border: 1px solid #2271B1;
+            color: #2271B1;
+            padding: 6px 12px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .connect-btn:hover {
+            background: #2271B1;
+            color: white;
+        }
+
+        .reconnect-btn {
+            background: #D63638;
+            border: 1px solid #D63638;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .reconnect-btn:hover {
+            background: #B32D2E;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: #646970;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 2px;
+            transition: background 0.15s ease;
+        }
+
+        .menu-btn:hover {
+            background: #F0F0F1;
+        }
+
+        /* Expanded Configuration */
+        .connector-config {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+            display: none;
+        }
+
+        .connector-config.show {
+            display: block;
+        }
+
+        .config-field {
+            margin-bottom: 16px;
+        }
+
+        .config-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1D2327;
+            margin-bottom: 6px;
+        }
+
+        .config-field input {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px 12px;
+            border: 1px solid #8C8F94;
+            border-radius: 4px;
+            font-size: 13px;
+            background: white;
+        }
+
+        .config-field input:focus {
+            border-color: #2271B1;
+            outline: none;
+            box-shadow: 0 0 0 1px #2271B1;
+        }
+
+        .config-description {
+            font-size: 12px;
+            color: #646970;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .config-description a {
+            color: #2271B1;
+            text-decoration: none;
+        }
+
+        .config-description a:hover {
+            text-decoration: underline;
+        }
+
+        .config-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .save-btn {
+            background: #2271B1;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .save-btn:hover {
+            background: #135E96;
+        }
+
+        .test-btn {
+            background: white;
+            border: 1px solid #8C8F94;
+            color: #50575E;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .test-btn:hover {
+            border-color: #646970;
+            color: #1D2327;
+        }
+
+        /* Plugin Badge */
+        .plugin-badge {
+            font-size: 10px;
+            color: #646970;
+            background: #F0F0F1;
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Bar -->
+    <div class="wp-admin-bar"></div>
+
+    <!-- Sidebar -->
+    <div class="wp-admin-sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Posts</a></li>
+            <li><a href="#">Media</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Comments</a></li>
+            <li>
+                <a href="#" class="active">Settings</a>
+                <ul class="submenu">
+                    <li><a href="#">General</a></li>
+                    <li><a href="#" style="color: white;">Connectors</a></li>
+                    <li><a href="#">Writing</a></li>
+                    <li><a href="#">Reading</a></li>
+                    <li><a href="#">Discussion</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Permalinks</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="wp-admin-content">
+        <div class="page-header">
+            <div>
+                <h1>Connectors</h1>
+                <p class="description">
+                    Manage API keys and external service connections for your WordPress site.
+                </p>
+            </div>
+            <a href="#" class="browse-btn">Browse Connectors</a>
+        </div>
+
+        <div class="connectors-list">
+            <!-- OpenAI - Connected -->
+            <div class="connector-card">
+                <div class="connector-icon openai">O</div>
+                <div class="connector-info">
+                    <div class="connector-name">OpenAI</div>
+                    <div class="connector-description">Access GPT models, DALL-E, and other OpenAI services</div>
+                </div>
+                <div class="connector-actions">
+                    <span class="status-badge status-connected">Connected</span>
+                    <button class="menu-btn" onclick="toggleMenu(this)">⋯</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" value="sk-••••••••••••••••••••••••••••••••••••••••••••••">
+                        <div class="config-description">
+                            Get your API key at <a href="#">platform.openai.com/api-keys</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="save-btn">Save Changes</button>
+                        <button class="test-btn">Test Connection</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anthropic - Connected -->
+            <div class="connector-card">
+                <div class="connector-icon anthropic">A</div>
+                <div class="connector-info">
+                    <div class="connector-name">Anthropic</div>
+                    <div class="connector-description">Access Claude models for advanced AI assistance</div>
+                </div>
+                <div class="connector-actions">
+                    <span class="status-badge status-connected">Connected</span>
+                    <button class="menu-btn" onclick="toggleMenu(this)">⋯</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" value="sk-ant-••••••••••••••••••••••••••••••••••••••••••••">
+                        <div class="config-description">
+                            Get your API key at <a href="#">console.anthropic.com</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="save-btn">Save Changes</button>
+                        <button class="test-btn">Test Connection</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google - Not Configured -->
+            <div class="connector-card">
+                <div class="connector-icon google">G</div>
+                <div class="connector-info">
+                    <div class="connector-name">Google</div>
+                    <div class="connector-description">Access Gemini models and Google AI services</div>
+                </div>
+                <div class="connector-actions">
+                    <button class="connect-btn" onclick="toggleConfig(this)">Connect</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" placeholder="Enter your Google AI API key">
+                        <div class="config-description">
+                            Get your API key at <a href="#">aistudio.google.com/app/apikey</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="save-btn">Save & Test</button>
+                        <button class="test-btn" onclick="toggleConfig(this)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OpenRouter - Not Configured -->
+            <div class="connector-card">
+                <div class="connector-icon openrouter">O</div>
+                <div class="connector-info">
+                    <div class="connector-name">OpenRouter</div>
+                    <div class="connector-description">Access multiple AI models through a unified API</div>
+                </div>
+                <div class="connector-actions">
+                    <button class="connect-btn" onclick="toggleConfig(this)">Connect</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" placeholder="Enter your OpenRouter API key">
+                        <div class="config-description">
+                            Get your API key at <a href="#">openrouter.ai/keys</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="save-btn">Save & Test</button>
+                        <button class="test-btn" onclick="toggleConfig(this)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grok - Not Configured -->
+            <div class="connector-card">
+                <div class="connector-icon grok">G</div>
+                <div class="connector-info">
+                    <div class="connector-name">Grok</div>
+                    <div class="connector-description">Access X.AI's Grok models for real-time AI assistance</div>
+                </div>
+                <div class="connector-actions">
+                    <button class="connect-btn" onclick="toggleConfig(this)">Connect</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" placeholder="Enter your Grok API key">
+                        <div class="config-description">
+                            Get your API key at <a href="#">x.ai/api</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="save-btn">Save & Test</button>
+                        <button class="test-btn" onclick="toggleConfig(this)">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Akismet - Connected, Plugin -->
+            <div class="connector-card">
+                <div class="connector-icon akismet">A</div>
+                <div class="connector-info">
+                    <div class="connector-name">
+                        Akismet
+                        <span class="plugin-badge">Plugin</span>
+                    </div>
+                    <div class="connector-description">Spam protection for comments and contact forms</div>
+                </div>
+                <div class="connector-actions">
+                    <span class="status-badge status-connected">Connected</span>
+                    <button class="menu-btn" onclick="toggleMenu(this)">⋯</button>
+                </div>
+                <div class="connector-config">
+                    <div class="config-field">
+                        <label>API Key</label>
+                        <input type="password" value="••••••••••••••••••••••••••••••••••••">
+                        <div class="config-description">
+                            Managed by the Akismet plugin. <a href="#">Configure in plugin settings</a>
+                        </div>
+                    </div>
+                    <div class="config-actions">
+                        <button class="test-btn">Test Connection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleConfig(button) {
+            const card = button.closest('.connector-card');
+            const config = card.querySelector('.connector-config');
+            const isShowing = config.classList.contains('show');
+            
+            if (isShowing) {
+                config.classList.remove('show');
+                button.textContent = 'Connect';
+                button.className = 'connect-btn';
+            } else {
+                config.classList.add('show');
+                button.textContent = 'Cancel';
+                button.className = 'test-btn';
+            }
+        }
+
+        function toggleMenu(button) {
+            const card = button.closest('.connector-card');
+            const config = card.querySelector('.connector-config');
+            const isShowing = config.classList.contains('show');
+            
+            if (isShowing) {
+                config.classList.remove('show');
+            } else {
+                config.classList.add('show');
+            }
+        }
+    </script>
+</body>
+</html>

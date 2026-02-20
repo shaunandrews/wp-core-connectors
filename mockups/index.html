@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Connectors Mockups</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dashicons/0.9.0/css/dashicons.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background: #F0F0F1;
+            color: #1D2327;
+        }
+
+        /* Admin Bar */
+        .wp-admin-bar {
+            background: #1D2327;
+            height: 32px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .wp-admin-sidebar {
+            background: #1D2327;
+            width: 160px;
+            height: calc(100vh - 32px);
+            position: fixed;
+            top: 32px;
+            left: 0;
+            padding: 12px 0;
+        }
+
+        .wp-admin-sidebar ul {
+            list-style: none;
+        }
+
+        .wp-admin-sidebar li {
+            margin-bottom: 2px;
+        }
+
+        .wp-admin-sidebar a {
+            display: block;
+            color: #F0F0F1;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-size: 13px;
+            transition: background 0.15s ease;
+        }
+
+        .wp-admin-sidebar a:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .wp-admin-sidebar .active {
+            background: #2271B1 !important;
+        }
+
+        .wp-admin-sidebar .submenu {
+            padding-left: 12px;
+        }
+
+        .wp-admin-sidebar .submenu a {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .wp-admin-content {
+            margin-left: 160px;
+            margin-top: 32px;
+            padding: 32px 20px;
+        }
+
+        .wp-admin-content h1 {
+            font-size: 23px;
+            font-weight: 400;
+            color: #1D2327;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #50575E;
+            font-size: 14px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        /* Concept Cards */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+        }
+
+        .concept-card {
+            background: white;
+            border: 1px solid #C3C4C7;
+            border-radius: 4px;
+            padding: 24px;
+            transition: box-shadow 0.15s ease;
+        }
+
+        .concept-card:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .concept-card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1D2327;
+            margin-bottom: 8px;
+        }
+
+        .concept-card .inspiration {
+            font-size: 12px;
+            color: #646970;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .concept-card p {
+            color: #50575E;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .concept-card .features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .concept-card .features li {
+            color: #646970;
+            font-size: 13px;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .concept-card .features li:before {
+            content: "•";
+            color: #2271B1;
+            position: absolute;
+            left: 0;
+        }
+
+        .concept-btn {
+            display: inline-block;
+            background: #2271B1;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 3px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: background 0.15s ease;
+        }
+
+        .concept-btn:hover {
+            background: #135E96;
+            color: white;
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #C3C4C7;
+            border-radius: 4px;
+            max-width: 1200px;
+        }
+
+        .footer-note h3 {
+            font-size: 16px;
+            color: #1D2327;
+            margin-bottom: 8px;
+        }
+
+        .footer-note p {
+            color: #50575E;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Bar -->
+    <div class="wp-admin-bar"></div>
+
+    <!-- Sidebar -->
+    <div class="wp-admin-sidebar">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Posts</a></li>
+            <li><a href="#">Media</a></li>
+            <li><a href="#">Pages</a></li>
+            <li><a href="#">Comments</a></li>
+            <li>
+                <a href="#" class="active">Settings</a>
+                <ul class="submenu">
+                    <li><a href="#">General</a></li>
+                    <li><a href="#" style="color: white;">Connectors</a></li>
+                    <li><a href="#">Writing</a></li>
+                    <li><a href="#">Reading</a></li>
+                    <li><a href="#">Discussion</a></li>
+                    <li><a href="#">Media</a></li>
+                    <li><a href="#">Permalinks</a></li>
+                    <li><a href="#">Privacy</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="wp-admin-content">
+        <h1>Connectors Mockups</h1>
+        <p class="description">
+            Three design concepts for the new WordPress Core "Settings » Connectors" page. 
+            This centralized keychain will manage API keys, OAuth flows, and external service connections for WordPress 7.0.
+        </p>
+
+        <div class="concepts-grid">
+            <!-- Concept A -->
+            <div class="concept-card">
+                <h2>Concept A: Card List</h2>
+                <div class="inspiration">Inspired by Claude's connectors page</div>
+                <p>A clean, vertical list of connector cards with inline configuration.</p>
+                <ul class="features">
+                    <li>Horizontal row layout with icons</li>
+                    <li>Status badges and action buttons</li>
+                    <li>Inline expansion for configuration</li>
+                    <li>Overflow menus for advanced actions</li>
+                </ul>
+                <a href="concept-a-card-list.html" class="concept-btn">View Concept A</a>
+            </div>
+
+            <!-- Concept B -->
+            <div class="concept-card">
+                <h2>Concept B: Grouped Fields</h2>
+                <div class="inspiration">Inspired by AI Services plugin</div>
+                <p>Traditional WordPress settings with modern cards and clear grouping.</p>
+                <ul class="features">
+                    <li>Grouped cards by service category</li>
+                    <li>Traditional form fields with labels</li>
+                    <li>Save Changes workflow</li>
+                    <li>Status indicators and help links</li>
+                </ul>
+                <a href="concept-b-grouped-fields.html" class="concept-btn">View Concept B</a>
+            </div>
+
+            <!-- Concept C -->
+            <div class="concept-card">
+                <h2>Concept C: Grid + Detail Panel</h2>
+                <div class="inspiration">Inspired by Untitled UI patterns</div>
+                <p>Modern, app-like interface with filtering and slide-out configuration.</p>
+                <ul class="features">
+                    <li>Sidebar filtering by category</li>
+                    <li>Card grid with toggle switches</li>
+                    <li>Slide-in detail panels</li>
+                    <li>Modern SaaS aesthetic</li>
+                </ul>
+                <a href="concept-c-grid-detail.html" class="concept-btn">View Concept C</a>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <h3>About This Project</h3>
+            <p>
+                These mockups explore different approaches for WordPress Core's new centralized connector management.
+                The page will live between General and Writing in the Settings submenu, providing a unified interface
+                for managing API keys for services like OpenAI, Anthropic, Google, and plugin-registered connections.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
