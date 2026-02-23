@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPress Connectors Prototypes</title>
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card: #fff;
+      --text: #1e1e1e;
+      --muted: #757575;
+      --accent: #3858e9;
+      --border: rgba(0,0,0,0.08);
+      --green: #4ab866;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1e1e1e;
+        --card: #2f2f2f;
+        --text: #f0f0f0;
+        --muted: #949494;
+        --border: rgba(255,255,255,0.08);
+      }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 48px;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+    .subtitle { color: var(--muted); margin-bottom: 40px; font-size: 15px; }
+    .subtitle a { color: var(--accent); }
+    .section { margin-bottom: 48px; }
+    .section-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 8px; }
+    .mockups { display: flex; flex-direction: column; gap: 12px; }
+
+    .mockup-card {
+      display: flex; align-items: flex-start; gap: 16px; padding: 20px;
+      background: var(--card); border-radius: 8px; text-decoration: none; color: inherit;
+      &:hover { outline: 1.5px solid var(--accent); outline-offset: 2px; }
+    }
+
+    .mockup-icon { width: 48px; height: 48px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+    .mockup-info { flex: 1; }
+    .mockup-name { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+    .mockup-desc { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .mockup-details { font-size: 13px; color: var(--text); }
+    .mockup-details ul { margin: 0; padding-left: 18px; }
+    .mockup-details li { margin-bottom: 4px; }
+    .mockup-arrow { color: var(--muted); font-size: 18px; margin-top: 12px; }
+    .status { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; text-transform: uppercase; }
+    .status-recommended { background: color-mix(in srgb, var(--green) 15%, transparent); color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>WordPress Connectors Prototypes</h1>
+    <p class="subtitle">Design mockups for Settings &rsaquo; Connectors — <a href="https://core.trac.wordpress.org/ticket/64591">#64591</a></p>
+
+    <div class="section">
+      <div class="section-title">Proposed Design</div>
+      <div class="mockups">
+        <a href="connectors.html" class="mockup-card">
+          <div class="mockup-icon">⚡</div>
+          <div class="mockup-info">
+            <div class="mockup-name">Connectors Screen <span class="status status-recommended">Proposed</span></div>
+            <div class="mockup-desc">Settings &rsaquo; Connectors page with interactive card states for AI provider connections.</div>
+            <div class="mockup-details">
+              <ul>
+                <li>Install — plugin not yet installed</li>
+                <li>Installing — plugin download in progress</li>
+                <li>Activate — plugin installed but inactive</li>
+                <li>Connect — plugin active, no API key</li>
+                <li>Setup — API key entry form</li>
+                <li>Connected — key saved, service active</li>
+                <li>Edit — modify or remove existing key</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mockup-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
