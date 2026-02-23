@@ -1,0 +1,493 @@
+/**
+ * Connectors Page Styles
+ *
+ * Styles for Settings > Connectors — the centralized keychain
+ * and connection manager for WordPress Core.
+ *
+ * All styles scoped inside .wp-connectors-frame.
+ * State visibility controlled via data-state attribute on .connector-card.
+ */
+
+
+/* ----------------------------------------------------------------
+   Page header
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .connectors-title {
+	font-size: 24px;
+	font-weight: 400;
+	color: #1e1e1e;
+	margin: 0 0 8px;
+	line-height: 1.3;
+}
+
+.wp-connectors-frame .connectors-subtitle {
+	font-size: 14px;
+	color: #757575;
+	max-width: 560px;
+	margin: 0 0 20px;
+	line-height: 1.5;
+}
+
+.wp-connectors-frame .connectors-separator {
+	border: none;
+	border-bottom: 1px solid #e0e0e0;
+	margin: 0 0 24px;
+}
+
+
+/* ----------------------------------------------------------------
+   Connector list + card
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .connectors-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.wp-connectors-frame .connector-card {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 20px;
+}
+
+
+/* ----------------------------------------------------------------
+   Card header row — icon + text + actions
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .connector-card__header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+
+/* Card icon */
+
+.wp-connectors-frame .connector-card__icon {
+	width: 48px;
+	height: 48px;
+	flex-shrink: 0;
+	border-radius: 0;
+}
+
+.wp-connectors-frame .connector-card__icon img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-radius: 0;
+}
+
+
+/* Card text */
+
+.wp-connectors-frame .connector-card__text {
+	flex: 1;
+	min-width: 0;
+}
+
+.wp-connectors-frame .connector-card__name {
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e1e1e;
+	line-height: 1.3;
+	margin: 0 0 2px;
+}
+
+.wp-connectors-frame .connector-card__description {
+	font-size: 14px;
+	color: #757575;
+	line-height: 1.4;
+	margin: 0;
+}
+
+
+/* Card actions container */
+
+.wp-connectors-frame .connector-card__actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-shrink: 0;
+}
+
+
+/* ----------------------------------------------------------------
+   Action buttons — outlined style
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .action-install,
+.wp-connectors-frame .action-activate,
+.wp-connectors-frame .action-connect {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #1e1e1e;
+	background: transparent;
+	border-radius: 4px;
+	padding: 6px 16px;
+	font-size: 13px;
+	font-family: inherit;
+	color: #1e1e1e;
+	cursor: pointer;
+	line-height: 1.4;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background-color 0.15s ease;
+}
+
+.wp-connectors-frame .action-install:hover,
+.wp-connectors-frame .action-activate:hover,
+.wp-connectors-frame .action-connect:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+
+/* Installing — barberpole animation */
+
+.wp-connectors-frame .action-installing {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #c0c0c0;
+	background-color: #f0f0f0;
+	background-image: repeating-linear-gradient(
+		-45deg,
+		transparent,
+		transparent 6px,
+		rgba(0, 0, 0, 0.06) 6px,
+		rgba(0, 0, 0, 0.06) 12px
+	);
+	background-size: 34px 34px;
+	animation: barberpole 0.8s linear infinite;
+	border-radius: 4px;
+	padding: 6px 16px;
+	font-size: 13px;
+	font-family: inherit;
+	color: #949494;
+	cursor: default;
+	line-height: 1.4;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+@keyframes barberpole {
+	from {
+		background-position: 0 0;
+	}
+
+	to {
+		background-position: 34px 0;
+	}
+}
+
+
+/* Cancel — red text link */
+
+.wp-connectors-frame .action-cancel {
+	background: none;
+	border: none;
+	color: #d63638;
+	font-size: 13px;
+	font-family: inherit;
+	cursor: pointer;
+	padding: 0;
+	line-height: 1.4;
+	text-decoration: none;
+}
+
+.wp-connectors-frame .action-cancel:hover {
+	text-decoration: underline;
+}
+
+
+/* Connected label — green */
+
+.wp-connectors-frame .action-connected-label {
+	color: #00a32a;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+
+/* Edit — blue text link */
+
+.wp-connectors-frame .action-edit {
+	background: none;
+	border: none;
+	color: #2271b1;
+	font-size: 13px;
+	font-family: inherit;
+	cursor: pointer;
+	padding: 0;
+	line-height: 1.4;
+	text-decoration: none;
+}
+
+.wp-connectors-frame .action-edit:hover {
+	text-decoration: underline;
+}
+
+
+/* ----------------------------------------------------------------
+   State visibility — hide everything by default, show per state
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .connector-card .action-install,
+.wp-connectors-frame .connector-card .action-installing,
+.wp-connectors-frame .connector-card .action-activate,
+.wp-connectors-frame .connector-card .action-connect,
+.wp-connectors-frame .connector-card .action-cancel,
+.wp-connectors-frame .connector-card .action-connected-label,
+.wp-connectors-frame .connector-card .action-edit,
+.wp-connectors-frame .connector-card .connector-card__body {
+	display: none;
+}
+
+/* install */
+.wp-connectors-frame .connector-card[data-state="install"] .action-install {
+	display: inline-flex;
+}
+
+/* installing */
+.wp-connectors-frame .connector-card[data-state="installing"] .action-installing {
+	display: inline-flex;
+}
+
+/* activate */
+.wp-connectors-frame .connector-card[data-state="activate"] .action-activate {
+	display: inline-flex;
+}
+
+/* connect */
+.wp-connectors-frame .connector-card[data-state="connect"] .action-connect {
+	display: inline-flex;
+}
+
+/* setup */
+.wp-connectors-frame .connector-card[data-state="setup"] .action-cancel {
+	display: inline-block;
+}
+
+.wp-connectors-frame .connector-card[data-state="setup"] .connector-card__body--setup {
+	display: block;
+}
+
+/* connected */
+.wp-connectors-frame .connector-card[data-state="connected"] .action-connected-label {
+	display: inline;
+}
+
+.wp-connectors-frame .connector-card[data-state="connected"] .action-edit {
+	display: inline;
+}
+
+/* edit */
+.wp-connectors-frame .connector-card[data-state="edit"] .action-cancel {
+	display: inline-block;
+}
+
+.wp-connectors-frame .connector-card[data-state="edit"] .connector-card__body--edit {
+	display: block;
+}
+
+
+/* ----------------------------------------------------------------
+   Card expanded body
+   ---------------------------------------------------------------- */
+
+.wp-connectors-frame .connector-card__body {
+	padding-top: 20px;
+	margin-top: 20px;
+	border-top: 1px solid #f0f0f0;
+}
+
+
+/* Field label — uppercase micro label */
+
+.wp-connectors-frame .field-label {
+	display: block;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #757575;
+	margin-bottom: 6px;
+}
+
+
+/* Field input */
+
+.wp-connectors-frame .field-input {
+	display: block;
+	width: 100%;
+	border: 1px solid #949494;
+	border-radius: 4px;
+	padding: 8px 12px;
+	font-size: 14px;
+	font-family: inherit;
+	line-height: 1.4;
+	color: #1e1e1e;
+	background: #fff;
+	outline: none;
+	transition: border-color 0.15s ease;
+}
+
+.wp-connectors-frame .field-input::placeholder {
+	color: #949494;
+}
+
+.wp-connectors-frame .field-input:focus {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+
+/* Edit state input — masked value, muted background */
+
+.wp-connectors-frame .connector-card__body--edit .field-input {
+	background: #f0f0f0;
+	color: #757575;
+}
+
+
+/* Help text */
+
+.wp-connectors-frame .field-help {
+	font-size: 13px;
+	color: #757575;
+	margin-top: 8px;
+	line-height: 1.5;
+}
+
+.wp-connectors-frame .field-help a {
+	color: #2271b1;
+	text-decoration: none;
+}
+
+.wp-connectors-frame .field-help a:hover {
+	text-decoration: underline;
+}
+
+.wp-connectors-frame .field-help a::after {
+	content: " \2197";
+	font-size: 11px;
+}
+
+
+/* Save button — filled blue */
+
+.wp-connectors-frame .action-save {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: #2271b1;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 6px 16px;
+	font-size: 13px;
+	font-family: inherit;
+	cursor: pointer;
+	line-height: 1.4;
+	margin-top: 16px;
+	transition: background-color 0.15s ease;
+}
+
+.wp-connectors-frame .action-save:hover {
+	background: #135e96;
+}
+
+
+/* Remove and replace — red link */
+
+.wp-connectors-frame .action-remove {
+	color: #d63638;
+	background: none;
+	border: none;
+	font-size: 13px;
+	font-family: inherit;
+	cursor: pointer;
+	padding: 0;
+	margin-top: 16px;
+	display: inline-block;
+	text-decoration: none;
+	line-height: 1.4;
+}
+
+.wp-connectors-frame .action-remove:hover {
+	text-decoration: underline;
+}
+
+
+/* ----------------------------------------------------------------
+   State controls bar — bottom debug toolbar
+   ---------------------------------------------------------------- */
+
+.state-controls {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	padding: 12px 24px;
+	display: flex;
+	align-items: flex-start;
+	gap: 24px;
+	z-index: 100000;
+	overflow-x: auto;
+}
+
+.state-controls__group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	flex-shrink: 0;
+}
+
+.state-controls__label {
+	font-size: 10px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: rgba(255, 255, 255, 0.5);
+	white-space: nowrap;
+}
+
+.state-controls__buttons {
+	display: flex;
+	gap: 4px;
+	flex-wrap: wrap;
+}
+
+.state-controls__btn {
+	font-size: 11px;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	background: rgba(255, 255, 255, 0.2);
+	color: #fff;
+	border: none;
+	border-radius: 100px;
+	padding: 4px 10px;
+	cursor: pointer;
+	white-space: nowrap;
+	font-family: inherit;
+	line-height: 1.4;
+	transition: background-color 0.15s ease;
+}
+
+.state-controls__btn:hover {
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.state-controls__btn.is-active {
+	background: #fff;
+	color: #1e1e1e;
+}
