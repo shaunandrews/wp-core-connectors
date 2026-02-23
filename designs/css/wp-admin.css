@@ -1,0 +1,348 @@
+/**
+ * wp-admin Chrome — Mockup Styles
+ *
+ * Fakes the wp-admin shell (adminbar, sidebar, content area) well enough
+ * to fool someone at a glance. Not a complete replica — just the bones.
+ *
+ * Colors and sizing pulled from WordPress 6.7 default admin scheme.
+ */
+
+
+/* -------------------------------------------------------------------------
+ * Reset & Base
+ * ---------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	line-height: 1.4em;
+	color: #3c434a;
+	background: #1e1e1e;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Adminbar (#wpadminbar)
+ * ---------------------------------------------------------------------- */
+
+#wpadminbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
+	height: 32px;
+	background: #1d2327;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 13px;
+	color: #c3c4c7;
+}
+
+#wpadminbar a {
+	color: #c3c4c7;
+	text-decoration: none;
+}
+
+#wpadminbar a:hover {
+	color: #72aee6;
+}
+
+/* Left side — WP logo + site name */
+#wpadminbar .ab-left {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+#wpadminbar .wp-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 32px;
+	background: transparent;
+}
+
+#wpadminbar .wp-logo:hover {
+	background: #2271b1;
+}
+
+#wpadminbar .wp-logo svg {
+	width: 16px;
+	height: 16px;
+	fill: #a7aaad;
+}
+
+#wpadminbar .wp-logo:hover svg {
+	fill: #fff;
+}
+
+#wpadminbar .site-name {
+	padding: 0 8px;
+	font-size: 13px;
+	line-height: 32px;
+	height: 32px;
+}
+
+#wpadminbar .site-name:hover {
+	background: #2271b1;
+	color: #fff;
+}
+
+/* Right side — Howdy + avatar */
+#wpadminbar .ab-right {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding-right: 0;
+}
+
+#wpadminbar .howdy-wrap {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0 12px 0 8px;
+	height: 32px;
+	line-height: 32px;
+	cursor: pointer;
+}
+
+#wpadminbar .howdy-wrap:hover {
+	background: #2271b1;
+	color: #fff;
+}
+
+#wpadminbar .howdy-name {
+	font-size: 13px;
+}
+
+#wpadminbar .avatar-placeholder {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #50575e;
+	border: 1px solid #a7aaad;
+	flex-shrink: 0;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Sidebar (#adminmenuwrap)
+ * ---------------------------------------------------------------------- */
+
+#adminmenuwrap {
+	position: fixed;
+	top: 32px;
+	left: 0;
+	bottom: 0;
+	width: 160px;
+	z-index: 9990;
+	background: #1d2327;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/* Scrollbar hiding for cleaner mockup */
+#adminmenuwrap::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
+}
+
+/* Menu list */
+#adminmenu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Top-level menu items */
+#adminmenu .menu-item > a {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 0 12px;
+	height: 34px;
+	color: #c3c4c7;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 34px;
+	border: none;
+	outline: none;
+	transition: none;
+}
+
+#adminmenu .menu-item > a:hover {
+	color: #fff;
+	background: #2271b1;
+}
+
+/* Dashicon placeholders in menu items */
+#adminmenu .menu-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	opacity: 0.6;
+	font-size: 16px;
+}
+
+#adminmenu .menu-item > a:hover .menu-icon,
+#adminmenu .menu-item.is-active > a .menu-icon {
+	opacity: 1;
+}
+
+/* Active/current top-level menu item */
+#adminmenu .menu-item.is-active > a {
+	color: #fff;
+	background: #2271b1;
+	font-weight: 600;
+}
+
+/* Menu separators */
+#adminmenu .menu-separator {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	border: none;
+	border-bottom: 1px solid #393f45;
+	margin: 5px 0;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Sub-menu (e.g., Settings sub-items)
+ * ---------------------------------------------------------------------- */
+
+#adminmenu .submenu {
+	list-style: none;
+	margin: 0;
+	padding: 6px 0;
+	background: #2c3338;
+	display: none;
+}
+
+/* Show submenu when parent is active */
+#adminmenu .menu-item.is-active .submenu {
+	display: block;
+}
+
+#adminmenu .submenu .submenu-item a {
+	display: block;
+	padding: 4px 12px 4px 18px;
+	color: #c3c4c7;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+#adminmenu .submenu .submenu-item a:hover {
+	color: #72aee6;
+}
+
+/* Active submenu item — Connectors */
+#adminmenu .submenu .submenu-item.is-active a {
+	color: #fff;
+	font-weight: 600;
+}
+
+#adminmenu .submenu .submenu-item.is-active {
+	border-left: 3px solid #72aee6;
+}
+
+#adminmenu .submenu .submenu-item.is-active a {
+	padding-left: 15px; /* compensate for 3px left border */
+}
+
+
+/* -------------------------------------------------------------------------
+ * Collapse Button (cosmetic)
+ * ---------------------------------------------------------------------- */
+
+#adminmenu .collapse-button {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0 12px;
+	height: 34px;
+	color: #c3c4c7;
+	font-size: 13px;
+	cursor: pointer;
+	border-top: 1px solid #393f45;
+	margin-top: 12px;
+}
+
+#adminmenu .collapse-button:hover {
+	color: #72aee6;
+}
+
+#adminmenu .collapse-button .collapse-arrow {
+	font-size: 14px;
+	opacity: 0.6;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Content Area (#wpcontent)
+ * ---------------------------------------------------------------------- */
+
+#wpcontent {
+	margin-left: 160px;
+	margin-top: 32px;
+	min-height: calc(100vh - 32px);
+	background: #1e1e1e;
+	padding: 20px;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Modern Content Frame (.wp-connectors-frame)
+ *
+ * The white rounded panel that sits on the dark background.
+ * This is the "Site Editor" style look: dark chrome, white workspace.
+ * ---------------------------------------------------------------------- */
+
+.wp-connectors-frame {
+	background: #ffffff;
+	border-radius: 8px;
+	min-height: calc(100vh - 32px - 40px); /* viewport minus adminbar minus padding */
+	padding: 40px;
+	position: relative;
+}
+
+
+/* -------------------------------------------------------------------------
+ * Screen Title (inside the frame)
+ *
+ * "Connectors" heading styled like wp-admin .wrap h1
+ * ---------------------------------------------------------------------- */
+
+.wp-connectors-frame .screen-title {
+	font-size: 23px;
+	font-weight: 400;
+	line-height: 1.3;
+	margin: 0 0 8px 0;
+	padding: 0;
+	color: #1d2327;
+}
+
+.wp-connectors-frame .screen-description {
+	font-size: 14px;
+	color: #646970;
+	margin: 0 0 24px 0;
+	max-width: 640px;
+}
