@@ -280,14 +280,14 @@ body {
 }
 
 
-/* Cancel — red text button */
+/* Cancel — theme text button */
 
 .wp-connectors-frame .action-cancel {
-	color: #d63638;
+	color: #3858E9;
 }
 
 .wp-connectors-frame .action-cancel:hover {
-	background: rgba(214, 54, 56, 0.08);
+	background: rgba(56, 88, 233, 0.08);
 }
 
 
@@ -355,10 +355,12 @@ body {
 .wp-connectors-frame .action-remove {
 	color: #d63638;
 	display: inline-block;
+	padding: 0;
 }
 
 .wp-connectors-frame .action-remove:hover {
-	background: rgba(214, 54, 56, 0.08);
+	background: none;
+	text-decoration: underline;
 }
 
 
