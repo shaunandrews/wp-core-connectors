@@ -6,11 +6,11 @@
  * 2. Clicking the actual card buttons simulates the install flow:
  *    Install → Installing (1.5s) → Setup → (Save) → Connected
  *    Connected → (Edit) → Edit → (Cancel) → Connected
- *    Setup → (Cancel) → Install
+ *    Setup → (Cancel) → Needs Setup → (Set up) → Setup
  */
 ( function() {
 	var STORAGE_KEY = 'connectors-states';
-	var VALID_STATES = [ 'install', 'installing', 'activate', 'connect', 'setup', 'connected', 'edit' ];
+	var VALID_STATES = [ 'install', 'installing', 'activate', 'connect', 'needs-setup', 'setup', 'connected', 'edit' ];
 
 	/**
 	 * Set a connector card to a given state and sync the control bar.
@@ -124,6 +124,13 @@
 				return;
 			}
 
+			// Set up → Setup (expand form)
+			if ( btn.classList.contains( 'action-setup' ) ) {
+				setState( connector, 'setup' );
+				saveStates();
+				return;
+			}
+
 			// Save → Connected
 			if ( btn.classList.contains( 'action-save' ) ) {
 				setState( connector, 'connected' );
@@ -145,8 +152,8 @@
 					// Cancel from edit → back to connected
 					setState( connector, 'connected' );
 				} else {
-					// Cancel from setup → back to install
-					setState( connector, 'install' );
+					// Cancel from setup → needs setup (collapsed, plugin still installed)
+					setState( connector, 'needs-setup' );
 				}
 				saveStates();
 				return;

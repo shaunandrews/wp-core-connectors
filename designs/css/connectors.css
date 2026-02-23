@@ -14,7 +14,8 @@
    ---------------------------------------------------------------- */
 
 .wp-connectors-frame .connectors-header {
-	padding: 40px 40px 32px;
+	padding: 16px 24px;
+	border-bottom: 1px solid #e0e0e0;
 }
 
 .wp-connectors-frame .connectors-title {
@@ -26,7 +27,7 @@
 }
 
 .wp-connectors-frame .connectors-subtitle {
-	font-size: 14px;
+	font-size: 13px;
 	color: #757575;
 	max-width: 560px;
 	margin: 0;
@@ -34,7 +35,7 @@
 }
 
 .wp-connectors-frame .connectors-body {
-	padding: 0 40px 40px;
+	padding: 24px;
 }
 
 
@@ -123,7 +124,8 @@
 
 .wp-connectors-frame .action-install,
 .wp-connectors-frame .action-activate,
-.wp-connectors-frame .action-connect {
+.wp-connectors-frame .action-connect,
+.wp-connectors-frame .action-setup {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -143,7 +145,8 @@
 
 .wp-connectors-frame .action-install:hover,
 .wp-connectors-frame .action-activate:hover,
-.wp-connectors-frame .action-connect:hover {
+.wp-connectors-frame .action-connect:hover,
+.wp-connectors-frame .action-setup:hover {
 	background: rgba(0, 0, 0, 0.05);
 }
 
@@ -250,6 +253,7 @@
 .wp-connectors-frame .connector-card .action-installing,
 .wp-connectors-frame .connector-card .action-activate,
 .wp-connectors-frame .connector-card .action-connect,
+.wp-connectors-frame .connector-card .action-setup,
 .wp-connectors-frame .connector-card .action-cancel,
 .wp-connectors-frame .connector-card .action-connected-label,
 .wp-connectors-frame .connector-card .action-edit,
@@ -274,6 +278,11 @@
 
 /* connect */
 .wp-connectors-frame .connector-card[data-state="connect"] .action-connect {
+	display: inline-flex;
+}
+
+/* needs-setup — installed but no key yet (collapsed) */
+.wp-connectors-frame .connector-card[data-state="needs-setup"] .action-setup {
 	display: inline-flex;
 }
 
@@ -311,7 +320,6 @@
 
 .wp-connectors-frame .connector-card__body {
 	padding-top: 20px;
-	margin-top: 20px;
 }
 
 
@@ -402,7 +410,6 @@
 	font-family: inherit;
 	cursor: pointer;
 	line-height: 1.4;
-	margin-top: 16px;
 	transition: background-color 0.15s ease;
 }
 
