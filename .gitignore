@@ -21,6 +21,12 @@ build/
 *.swo
 *~
 
+# Project docs (kept locally, not versioned)
+docs/
+
+# Vercel
+.vercel/
+
 # OS
 .DS_Store
 Thumbs.db
