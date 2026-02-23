@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings › Connectors — WordPress</title>
+  <link rel="stylesheet" href="css/wp-admin.css">
+  <link rel="stylesheet" href="css/connectors.css">
+</head>
+<body>
+
+  <!-- Adminbar -->
+  <div id="wpadminbar">
+    <div class="ab-left">
+      <a href="#" class="wp-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="16" height="16">
+          <path d="M20 10c0-5.51-4.49-10-10-10C4.48 0 0 4.49 0 10c0 5.52 4.48 10 10 10 5.51 0 10-4.48 10-10zM7.78 15.37L4.37 6.22c.55-.02 1.17-.08 1.17-.08.5-.06.44-.86-.06-.83 0 0-1.45.11-2.37.11-.18 0-.37 0-.58-.01C4.12 2.69 6.87 1.11 10 1.11c2.33 0 4.45.87 6.05 2.34-.68-.11-1.65.39-1.65 1.58 0 .74.45 1.36.9 2.1.35.61.55 1.36.55 2.46 0 1.49-1.4 5-1.4 5l-3.03-8.37c.54-.02.82-.17.82-.17.5-.05.44-.74-.06-.72 0 0-1.44.12-2.38.12-.87 0-2.33-.12-2.33-.12-.5-.02-.56.73-.06.75 0 0 .4.01.9.03zM1.49 10c0-1.7.52-3.27 1.4-4.6L6.07 17.6C3.37 16.14 1.49 13.27 1.49 10zm13.07 1.09L12.4 17.28l-2.31-6.73c.36-.03.67-.07.67-.07.5-.05.44-.74-.06-.72l-2.34.12-2.34-.12c-.5-.02-.56.72-.06.72 0 0 .27.04.6.07l.9 2.47-1.25 3.76L3.55 10.6l.9-2.47c.36-.03.67-.07.67-.07.5-.05.44-.74-.06-.72l.98-.01-1-.28c.95-1.55 2.64-2.5 4.51-2.5 1.47 0 2.83.55 3.85 1.5l-.15-.01c-.87 0-1.44.77-1.44 1.6 0 .74.43 1.37.88 2.11.34.56.73 1.27.73 2.31 0 .72-.28 1.55-.64 2.71zM10 18.89c-.89 0-1.74-.13-2.55-.37l2.72-7.87 2.78 7.63c.02.05.05.09.07.13-.96.31-2 .48-3.02.48z"/>
+        </svg>
+      </a>
+      <a href="#" class="site-name">My WordPress Site</a>
+    </div>
+    <div class="ab-right">
+      <div class="howdy-wrap">
+        <span class="howdy-name">Howdy, Admin</span>
+        <span class="avatar-placeholder"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="adminmenuwrap">
+    <ul id="adminmenu">
+
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">📊</span>
+          Dashboard
+        </a>
+      </li>
+
+      <li class="menu-separator"></li>
+
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">📌</span>
+          Posts
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">🎵</span>
+          Media
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">📄</span>
+          Pages
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">💬</span>
+          Comments
+        </a>
+      </li>
+
+      <li class="menu-separator"></li>
+
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">🎨</span>
+          Appearance
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">🔌</span>
+          Plugins
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">👥</span>
+          Users
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="#">
+          <span class="menu-icon">🔧</span>
+          Tools
+        </a>
+      </li>
+      <li class="menu-item is-active">
+        <a href="#">
+          <span class="menu-icon">⚙️</span>
+          Settings
+        </a>
+        <ul class="submenu">
+          <li class="submenu-item"><a href="#">General</a></li>
+          <li class="submenu-item is-active"><a href="#">Connectors</a></li>
+          <li class="submenu-item"><a href="#">Writing</a></li>
+          <li class="submenu-item"><a href="#">Reading</a></li>
+          <li class="submenu-item"><a href="#">Discussion</a></li>
+          <li class="submenu-item"><a href="#">Media</a></li>
+          <li class="submenu-item"><a href="#">Permalinks</a></li>
+          <li class="submenu-item"><a href="#">Privacy</a></li>
+        </ul>
+      </li>
+
+      <li class="menu-separator"></li>
+
+      <li class="collapse-button">
+        <span class="collapse-arrow">◀</span>
+        Collapse menu
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Content -->
+  <div id="wpcontent">
+    <div class="wp-connectors-frame">
+
+      <h1 class="connectors-title">Connectors</h1>
+      <p class="connectors-subtitle">All of your API keys and credentials are stored here and shared across plugins. Configure once and use everywhere.</p>
+      <hr class="connectors-separator">
+
+      <div class="connectors-list">
+
+        <!-- OpenAI -->
+        <div class="connector-card" data-connector="openai" data-state="install">
+          <div class="connector-card__header">
+            <div class="connector-card__icon">
+              <img src="openai.png" alt="OpenAI">
+            </div>
+            <div class="connector-card__text">
+              <div class="connector-card__name">OpenAI</div>
+              <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+            </div>
+            <div class="connector-card__actions">
+              <button class="action-install">Install</button>
+              <button class="action-installing">Installing...</button>
+              <button class="action-activate">Activate</button>
+              <button class="action-connect">Connect</button>
+              <button class="action-cancel">Cancel</button>
+              <span class="action-connected-label">Connected</span>
+              <button class="action-edit">Edit</button>
+            </div>
+          </div>
+          <div class="connector-card__body connector-card__body--setup">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" placeholder="Enter your OpenAI API key">
+            <p class="field-help">Get your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+            <button class="action-save">Save</button>
+          </div>
+          <div class="connector-card__body connector-card__body--edit">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly>
+            <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+            <button class="action-remove">Remove and replace</button>
+          </div>
+        </div>
+
+        <!-- Claude -->
+        <div class="connector-card" data-connector="claude" data-state="install">
+          <div class="connector-card__header">
+            <div class="connector-card__icon">
+              <img src="claude.png" alt="Claude">
+            </div>
+            <div class="connector-card__text">
+              <div class="connector-card__name">Claude</div>
+              <p class="connector-card__description">Writing, research, and analysis with Claude.</p>
+            </div>
+            <div class="connector-card__actions">
+              <button class="action-install">Install</button>
+              <button class="action-installing">Installing...</button>
+              <button class="action-activate">Activate</button>
+              <button class="action-connect">Connect</button>
+              <button class="action-cancel">Cancel</button>
+              <span class="action-connected-label">Connected</span>
+              <button class="action-edit">Edit</button>
+            </div>
+          </div>
+          <div class="connector-card__body connector-card__body--setup">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" placeholder="Enter your Claude API key">
+            <p class="field-help">Get your API key at <a href="https://console.anthropic.com/settings/keys">console.anthropic.com</a></p>
+            <button class="action-save">Save</button>
+          </div>
+          <div class="connector-card__body connector-card__body--edit">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly>
+            <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="https://console.anthropic.com/settings/keys">console.anthropic.com</a></p>
+            <button class="action-remove">Remove and replace</button>
+          </div>
+        </div>
+
+        <!-- Gemini -->
+        <div class="connector-card" data-connector="google" data-state="install">
+          <div class="connector-card__header">
+            <div class="connector-card__icon">
+              <img src="google.png" alt="Gemini">
+            </div>
+            <div class="connector-card__text">
+              <div class="connector-card__name">Gemini</div>
+              <p class="connector-card__description">Content generation, translation, and vision with Google's Gemini.</p>
+            </div>
+            <div class="connector-card__actions">
+              <button class="action-install">Install</button>
+              <button class="action-installing">Installing...</button>
+              <button class="action-activate">Activate</button>
+              <button class="action-connect">Connect</button>
+              <button class="action-cancel">Cancel</button>
+              <span class="action-connected-label">Connected</span>
+              <button class="action-edit">Edit</button>
+            </div>
+          </div>
+          <div class="connector-card__body connector-card__body--setup">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" placeholder="Enter your Gemini API key">
+            <p class="field-help">Get your API key at <a href="https://aistudio.google.com/apikey">aistudio.google.com</a></p>
+            <button class="action-save">Save</button>
+          </div>
+          <div class="connector-card__body connector-card__body--edit">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly>
+            <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="https://aistudio.google.com/apikey">aistudio.google.com</a></p>
+            <button class="action-remove">Remove and replace</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- State controls -->
+  <div class="state-controls">
+
+    <div class="state-controls__group">
+      <span class="state-controls__label">OpenAI</span>
+      <div class="state-controls__buttons">
+        <button class="state-controls__btn is-active" data-connector="openai" data-state="install">Install</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="installing">Installing</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="activate">Activate</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="connect">Connect</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="setup">Setup</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="connected">Connected</button>
+        <button class="state-controls__btn" data-connector="openai" data-state="edit">Edit</button>
+      </div>
+    </div>
+
+    <div class="state-controls__group">
+      <span class="state-controls__label">Claude</span>
+      <div class="state-controls__buttons">
+        <button class="state-controls__btn is-active" data-connector="claude" data-state="install">Install</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="installing">Installing</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="activate">Activate</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="connect">Connect</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="setup">Setup</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="connected">Connected</button>
+        <button class="state-controls__btn" data-connector="claude" data-state="edit">Edit</button>
+      </div>
+    </div>
+
+    <div class="state-controls__group">
+      <span class="state-controls__label">Gemini</span>
+      <div class="state-controls__buttons">
+        <button class="state-controls__btn is-active" data-connector="google" data-state="install">Install</button>
+        <button class="state-controls__btn" data-connector="google" data-state="installing">Installing</button>
+        <button class="state-controls__btn" data-connector="google" data-state="activate">Activate</button>
+        <button class="state-controls__btn" data-connector="google" data-state="connect">Connect</button>
+        <button class="state-controls__btn" data-connector="google" data-state="setup">Setup</button>
+        <button class="state-controls__btn" data-connector="google" data-state="connected">Connected</button>
+        <button class="state-controls__btn" data-connector="google" data-state="edit">Edit</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/connectors.js"></script>
+</body>
+</html>
