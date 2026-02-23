@@ -185,23 +185,34 @@
 }
 
 
-/* Cancel — red text link */
+/* Text button — shared base for Cancel, Edit, Remove */
 
-.wp-connectors-frame .action-cancel {
+.wp-connectors-frame .btn-text {
 	background: none;
 	border: none;
-	color: #d63638;
 	font-size: 13px;
 	font-family: inherit;
 	cursor: pointer;
 	padding: 6px 16px;
 	line-height: 1.4;
 	text-decoration: none;
+	border-radius: 4px;
+	transition: background-color 0.15s ease;
+}
+
+.wp-connectors-frame .btn-text:hover {
+	background: rgba(0, 0, 0, 0.05);
+}
+
+
+/* Cancel — red text button */
+
+.wp-connectors-frame .action-cancel {
+	color: #d63638;
 }
 
 .wp-connectors-frame .action-cancel:hover {
 	background: rgba(214, 54, 56, 0.08);
-	border-radius: 4px;
 }
 
 
@@ -215,22 +226,14 @@
 }
 
 
-/* Edit — blue text link */
+/* Edit — blue text button */
 
 .wp-connectors-frame .action-edit {
-	background: none;
-	border: none;
 	color: #2271b1;
-	font-size: 13px;
-	font-family: inherit;
-	cursor: pointer;
-	padding: 6px 16px;
-	line-height: 1.4;
-	text-decoration: none;
 }
 
 .wp-connectors-frame .action-edit:hover {
-	text-decoration: underline;
+	background: rgba(34, 113, 177, 0.08);
 }
 
 
@@ -403,24 +406,16 @@
 }
 
 
-/* Remove and replace — red link */
+/* Remove and replace — red text button */
 
 .wp-connectors-frame .action-remove {
 	color: #d63638;
-	background: none;
-	border: none;
-	font-size: 13px;
-	font-family: inherit;
-	cursor: pointer;
-	padding: 6px 16px;
 	margin-top: 16px;
 	display: inline-block;
-	text-decoration: none;
-	line-height: 1.4;
 }
 
 .wp-connectors-frame .action-remove:hover {
-	text-decoration: underline;
+	background: rgba(214, 54, 56, 0.08);
 }
 
 
