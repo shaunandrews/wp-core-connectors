@@ -546,14 +546,88 @@ body {
 
 
 /* ================================================================
-   Error toggle — floating bottom-left
+   Empty state
    ================================================================ */
 
-.error-toggle {
+.wp-connectors-frame .connectors-empty {
+	display: none;
+	max-width: 400px;
+	margin: 0 auto;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.wp-connectors-frame .connectors-empty__title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 0 0 8px;
+	line-height: 1.3;
+}
+
+.wp-connectors-frame .connectors-empty__text {
+	font-size: 13px;
+	color: #757575;
+	line-height: 1.5;
+	margin: 0 0 12px;
+}
+
+.wp-connectors-frame .connectors-empty__action {
+	margin-top: 16px;
+}
+
+.wp-connectors-frame .connectors-empty__plugins {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	margin-top: 40px;
+}
+
+.wp-connectors-frame .connectors-empty__plugins-title {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #757575;
+	margin-bottom: 4px;
+}
+
+.wp-connectors-frame .connectors-empty__plugins-list {
+	display: flex;
+	gap: 8px;
+}
+
+.wp-connectors-frame .connectors-empty__plugin {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: #1e1e1e;
+}
+
+.wp-connectors-frame .connectors-empty__plugin img {
+	width: 20px;
+	height: 20px;
+}
+
+
+/* ================================================================
+   Demo toggles — floating bottom-left toolbar
+   ================================================================ */
+
+.demo-toggles {
 	position: fixed;
 	bottom: 16px;
 	left: 176px;
 	z-index: 100000;
+	display: flex;
+	gap: 4px;
+}
+
+.demo-toggle {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -566,7 +640,7 @@ body {
 	user-select: none;
 }
 
-.error-toggle__label {
+.demo-toggle__label {
 	font-size: 11px;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -575,7 +649,7 @@ body {
 	white-space: nowrap;
 }
 
-.error-toggle__track {
+.demo-toggle__track {
 	width: 32px;
 	height: 18px;
 	background: rgba(255, 255, 255, 0.2);
@@ -584,7 +658,7 @@ body {
 	transition: background-color 0.15s ease;
 }
 
-.error-toggle__thumb {
+.demo-toggle__thumb {
 	width: 14px;
 	height: 14px;
 	background: #fff;
@@ -595,10 +669,10 @@ body {
 	transition: transform 0.15s ease;
 }
 
-.error-toggle.is-active .error-toggle__track {
-	background: #d63638;
+.demo-toggle.is-active .demo-toggle__track {
+	background: #3858E9;
 }
 
-.error-toggle.is-active .error-toggle__thumb {
+.demo-toggle.is-active .demo-toggle__thumb {
 	transform: translateX(14px);
 }

@@ -6,12 +6,14 @@
  * Connected → (Edit) → Edit → (Cancel) → Connected
  * Setup → (Cancel) → Needs Setup → (Set up) → Setup
  *
- * Error toggle (bottom-left): when active, Install and Save
- * simulate failures with inline error messages.
+ * Demo toggles (bottom-left):
+ * - Empty: shows empty state, hides connector cards
+ * - Errors: Install and Save simulate failures
  */
 ( function() {
 
 	var errorMode = false;
+	var emptyMode = false;
 
 	function setState( connector, state ) {
 		var card = document.querySelector( '.connector-card[data-connector="' + connector + '"]' );
@@ -36,12 +38,35 @@
 		}
 	}
 
+	// Empty toggle
+	var toggleEmpty = document.getElementById( 'toggle-empty' );
+	var connectorsHeader = document.querySelector( '.connectors-header' );
+	var connectorsList = document.querySelector( '.connectors-list' );
+	var connectorsEmpty = document.querySelector( '.connectors-empty' );
+
+	if ( toggleEmpty ) {
+		toggleEmpty.addEventListener( 'click', function() {
+			emptyMode = ! emptyMode;
+			toggleEmpty.classList.toggle( 'is-active', emptyMode );
+
+			if ( connectorsHeader ) {
+				connectorsHeader.style.display = emptyMode ? 'none' : '';
+			}
+			if ( connectorsList ) {
+				connectorsList.style.display = emptyMode ? 'none' : '';
+			}
+			if ( connectorsEmpty ) {
+				connectorsEmpty.style.display = emptyMode ? 'block' : '';
+			}
+		} );
+	}
+
 	// Error toggle
-	var toggle = document.getElementById( 'error-toggle' );
-	if ( toggle ) {
-		toggle.addEventListener( 'click', function() {
+	var toggleErrors = document.getElementById( 'toggle-errors' );
+	if ( toggleErrors ) {
+		toggleErrors.addEventListener( 'click', function() {
 			errorMode = ! errorMode;
-			toggle.classList.toggle( 'is-active', errorMode );
+			toggleErrors.classList.toggle( 'is-active', errorMode );
 
 			// Clear all visible errors when toggling off
 			if ( ! errorMode ) {

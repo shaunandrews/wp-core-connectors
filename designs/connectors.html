@@ -24,6 +24,30 @@
       </div>
 
       <div class="connectors-body">
+
+      <div class="connectors-empty">
+        <p class="connectors-empty__title">No connectors yet</p>
+        <p class="connectors-empty__text">Connectors appear here when you install plugins that use external services. Each plugin registers the API keys it needs, and you manage them all in one place.</p>
+        <a href="#" class="action-connect connectors-empty__action">Learn more</a>
+        <div class="connectors-empty__plugins">
+          <span class="connectors-empty__plugins-title">Plugins with connectors</span>
+          <div class="connectors-empty__plugins-list">
+            <a href="https://wordpress.org/plugins/" class="btn-text connectors-empty__plugin" target="_blank" rel="noopener">
+              <img src="openai.png" alt="OpenAI">
+              <span>OpenAI</span>
+            </a>
+            <a href="https://wordpress.org/plugins/" class="btn-text connectors-empty__plugin" target="_blank" rel="noopener">
+              <img src="claude.png" alt="Claude">
+              <span>Claude</span>
+            </a>
+            <a href="https://wordpress.org/plugins/" class="btn-text connectors-empty__plugin" target="_blank" rel="noopener">
+              <img src="google.png" alt="Gemini">
+              <span>Gemini</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="connectors-list">
 
         <!-- OpenAI -->
@@ -137,15 +161,60 @@
           </div>
         </div>
 
+        <!-- Google Maps -->
+        <div class="connector-card" data-connector="gmaps" data-state="install">
+          <div class="connector-card__header">
+            <div class="connector-card__icon">
+              <img src="gmaps.png" alt="Google Maps">
+            </div>
+            <div class="connector-card__text">
+              <div class="connector-card__name">Google Maps</div>
+              <p class="connector-card__description">Embed maps, geocoding, and location services from Google Maps Platform.</p>
+              <p class="connector-card__error">Could not install connector. Please try again.</p>
+            </div>
+            <div class="connector-card__actions">
+              <button class="action-install">Install</button>
+              <button class="action-installing">Installing...</button>
+              <button class="action-activate">Activate</button>
+              <button class="action-connect">Connect</button>
+              <button class="action-setup">Set up</button>
+              <button class="btn-text action-cancel">Cancel</button>
+              <button class="btn-text action-edit">Edit</button>
+              <span class="action-connected-label">Connected</span>
+            </div>
+          </div>
+          <div class="connector-card__body connector-card__body--setup">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" placeholder="YOUR_API_KEY">
+            <p class="field-help">Get your API key at <a href="https://console.cloud.google.com/apis/credentials">console.cloud.google.com</a></p>
+            <p class="field-error">Invalid API key. Please check your key and try again.</p>
+            <button class="action-save">Save</button>
+          </div>
+          <div class="connector-card__body connector-card__body--edit">
+            <label class="field-label">API Key</label>
+            <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly>
+            <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="https://console.cloud.google.com/apis/credentials">console.cloud.google.com</a></p>
+            <button class="btn-text action-remove">Remove and replace</button>
+          </div>
+        </div>
+
       </div>
       </div>
     </div>
   </div>
 
-  <div class="error-toggle" id="error-toggle">
-    <span class="error-toggle__label">Errors</span>
-    <div class="error-toggle__track">
-      <div class="error-toggle__thumb"></div>
+  <div class="demo-toggles">
+    <div class="demo-toggle" id="toggle-empty">
+      <span class="demo-toggle__label">Empty</span>
+      <div class="demo-toggle__track">
+        <div class="demo-toggle__thumb"></div>
+      </div>
+    </div>
+    <div class="demo-toggle" id="toggle-errors">
+      <span class="demo-toggle__label">Errors</span>
+      <div class="demo-toggle__track">
+        <div class="demo-toggle__thumb"></div>
+      </div>
     </div>
   </div>
 
