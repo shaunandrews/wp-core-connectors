@@ -194,7 +194,7 @@
 	font-size: 13px;
 	font-family: inherit;
 	cursor: pointer;
-	padding: 0;
+	padding: 6px 16px;
 	line-height: 1.4;
 	text-decoration: none;
 }
@@ -223,7 +223,7 @@
 	font-size: 13px;
 	font-family: inherit;
 	cursor: pointer;
-	padding: 0;
+	padding: 6px 16px;
 	line-height: 1.4;
 	text-decoration: none;
 }
@@ -413,7 +413,7 @@
 	font-size: 13px;
 	font-family: inherit;
 	cursor: pointer;
-	padding: 0;
+	padding: 6px 16px;
 	margin-top: 16px;
 	display: inline-block;
 	text-decoration: none;
