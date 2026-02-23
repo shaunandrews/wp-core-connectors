@@ -219,10 +219,13 @@
 /* Connected label — green */
 
 .wp-connectors-frame .action-connected-label {
-	color: #00a32a;
+	color: #345B37;
+	background: #EFF8F0;
 	font-weight: 500;
 	font-size: 13px;
 	line-height: 1.4;
+	padding: 4px 12px;
+	border-radius: 4px;
 }
 
 
