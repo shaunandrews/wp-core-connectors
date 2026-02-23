@@ -320,7 +320,7 @@ body {
 	background: #ffffff;
 	border-radius: 8px;
 	min-height: calc(100vh - 32px - 40px); /* viewport minus adminbar minus padding */
-	padding: 40px;
+	padding: 0;
 	position: relative;
 }
 
