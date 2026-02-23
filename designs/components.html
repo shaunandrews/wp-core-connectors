@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Components — Connectors</title>
-  <link rel="stylesheet" href="css/wp-admin.css">
   <link rel="stylesheet" href="css/connectors.css">
   <style>
     /* Component page layout — sits inside the white frame */
@@ -167,6 +166,10 @@
               <button class="action-save">Save</button>
             </div>
             <div class="component-item">
+              <span class="component-label">Saving (busy)</span>
+              <button class="action-save is-saving">Saving…</button>
+            </div>
+            <div class="component-item">
               <span class="component-label">Cancel</span>
               <button class="btn-text action-cancel">Cancel</button>
             </div>
@@ -225,6 +228,16 @@
               <span class="component-label">Help text (secret)</span>
               <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="#">platform.openai.com</a></p>
             </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 16px;">
+              <span class="component-label">Field error</span>
+              <p class="field-error is-visible">Invalid API key. Please check your key and try again.</p>
+            </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 16px;">
+              <span class="component-label">Card header error</span>
+              <p class="connector-card__error is-visible">Could not install connector. Please try again.</p>
+            </div>
           </div>
         </div>
 
@@ -277,6 +290,31 @@
         </div>
 
         <!-- ============================================================
+             Card — Header / Error
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Card / Header — Error</div>
+
+          <div class="component-card-demo">
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                  <p class="connector-card__error is-visible">Could not install connector. Please try again.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <button class="action-install">Install</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
              Card — Body / Setup
              ============================================================ -->
         <div class="component-section">
@@ -300,6 +338,37 @@
                 <label class="field-label">API Key</label>
                 <input class="field-input" type="text" placeholder="YOUR_API_KEY">
                 <p class="field-help">Get your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+                <button class="action-save">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Card — Body / Setup Error
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Card / Body — Setup Error</div>
+
+          <div class="component-card-demo">
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <button class="btn-text action-cancel">Cancel</button>
+                </div>
+              </div>
+              <div class="connector-card__body connector-card__body--setup">
+                <label class="field-label">API Key</label>
+                <input class="field-input" type="text" placeholder="YOUR_API_KEY">
+                <p class="field-help">Get your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+                <p class="field-error is-visible">Invalid API key. Please check your key and try again.</p>
                 <button class="action-save">Save</button>
               </div>
             </div>

@@ -3,7 +3,7 @@
  * Connectors Admin Settings Page.
  *
  * Registers the Settings » Connectors page and passes connector data to JS.
- * The UI is rendered entirely client-side for interactive card states.
+ * The UI is rendered entirely client-side as an accordion/expandable-sections layout.
  *
  * @package WP_Connectors
  */
@@ -12,9 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WP_Connectors_Admin {
+class WP_Connectors_Dataforms_Admin {
 
-	const PAGE_SLUG = 'wp-connectors';
+	const PAGE_SLUG = 'wp-connectors-dataforms';
 
 	/**
 	 * Boot the admin hooks.
@@ -30,8 +30,8 @@ class WP_Connectors_Admin {
 	 */
 	public function add_menu_page() {
 		add_options_page(
-			__( 'Connectors', 'wp-connectors' ),
-			__( 'Connectors', 'wp-connectors' ),
+			__( 'Connectors (Dataforms)', 'wp-connectors' ),
+			__( 'Connectors (Dataforms)', 'wp-connectors' ),
 			'manage_options',
 			self::PAGE_SLUG,
 			array( $this, 'render_page' )
@@ -94,21 +94,21 @@ class WP_Connectors_Admin {
 		}
 
 		wp_enqueue_style(
-			'wp-connectors-admin',
+			'wp-connectors-dataforms-admin',
 			WP_CONNECTORS_URL . 'assets/css/admin.css',
 			array(),
 			WP_CONNECTORS_VERSION
 		);
 
 		wp_enqueue_script(
-			'wp-connectors-admin',
+			'wp-connectors-dataforms-admin',
 			WP_CONNECTORS_URL . 'assets/js/admin.js',
 			array(),
 			WP_CONNECTORS_VERSION,
 			true
 		);
 
-		wp_localize_script( 'wp-connectors-admin', 'wpConnectors', $this->get_connectors_data() );
+		wp_localize_script( 'wp-connectors-dataforms-admin', 'wpConnectors', $this->get_connectors_data() );
 	}
 
 	/**
@@ -132,7 +132,7 @@ class WP_Connectors_Admin {
 	}
 
 	/**
-	 * Render the page shell. Cards are rendered by JS.
+	 * Render the page shell. The accordion UI is rendered by JS.
 	 */
 	public function render_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -144,7 +144,7 @@ class WP_Connectors_Admin {
 			<p class="wp-connectors-intro">
 				<?php esc_html_e( 'Connect WordPress to external services. API keys entered here are available to any plugin that needs them — one place for all your connections.', 'wp-connectors' ); ?>
 			</p>
-			<div class="wp-connectors-grid" id="wp-connectors-grid"></div>
+			<div class="wp-connectors-accordion" id="wp-connectors-accordion"></div>
 		</div>
 		<?php
 	}

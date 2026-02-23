@@ -1,0 +1,311 @@
+/**
+ * WP Connectors — Accordion / Dataforms Styles.
+ *
+ * Compact, single-column accordion layout for connector settings.
+ */
+
+/* ==========================================================================
+   Page Layout
+   ========================================================================== */
+
+.wp-connectors-wrap {
+	max-width: 700px;
+	margin: 20px auto 40px 0;
+}
+
+.wp-connectors-wrap h1 {
+	font-size: 23px;
+	font-weight: 400;
+	margin: 0 0 8px;
+	padding: 0;
+	line-height: 1.3;
+}
+
+.wp-connectors-intro {
+	font-size: 14px;
+	color: #50575e;
+	margin: 0 0 24px;
+	line-height: 1.6;
+}
+
+/* ==========================================================================
+   Accordion Container
+   ========================================================================== */
+
+.wp-connectors-accordion {
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	background: #fff;
+	overflow: hidden;
+}
+
+/* ==========================================================================
+   Row — Collapsed Header
+   ========================================================================== */
+
+.wp-connector-row {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.wp-connector-row:last-child {
+	border-bottom: 0;
+}
+
+.wp-connector-row__header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 14px 16px;
+	margin: 0;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	text-align: left;
+	font-size: 14px;
+	line-height: 1.4;
+	color: #1d2327;
+	transition: background-color 0.15s ease;
+	gap: 12px;
+}
+
+.wp-connector-row__header:hover,
+.wp-connector-row__header:focus-visible {
+	background-color: #f6f7f7;
+}
+
+.wp-connector-row__header:focus {
+	outline: 0;
+	box-shadow: none;
+}
+
+.wp-connector-row__header:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: -2px;
+}
+
+/* Icon */
+.wp-connector-row__icon {
+	flex: 0 0 24px;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wp-connector-row__icon img {
+	display: block;
+	width: 24px;
+	height: 24px;
+}
+
+/* Name */
+.wp-connector-row__name {
+	flex: 1 1 auto;
+	font-weight: 600;
+}
+
+/* Status */
+.wp-connector-row__status {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 13px;
+	color: #787c82;
+}
+
+.wp-connector-row__status.connected {
+	color: #00a32a;
+}
+
+.wp-connector-row__status-dot {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #c3c4c7;
+}
+
+.wp-connector-row__status.connected .wp-connector-row__status-dot {
+	background: #00a32a;
+}
+
+/* Chevron */
+.wp-connector-row__chevron {
+	flex: 0 0 20px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.25s ease;
+}
+
+.wp-connector-row__chevron::before {
+	content: '';
+	display: block;
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid #787c82;
+	border-bottom: 2px solid #787c82;
+	transform: rotate( -45deg );
+	transition: transform 0.25s ease;
+}
+
+.wp-connector-row.is-expanded .wp-connector-row__chevron::before {
+	transform: rotate( 45deg );
+}
+
+/* ==========================================================================
+   Row — Expandable Body
+   ========================================================================== */
+
+.wp-connector-row__body {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease;
+}
+
+.wp-connector-row.is-expanded .wp-connector-row__body {
+	max-height: 400px;
+}
+
+.wp-connector-row__body-inner {
+	padding: 0 16px 20px 52px;
+}
+
+/* Description */
+.wp-connector-row__description {
+	font-size: 13px;
+	color: #50575e;
+	line-height: 1.5;
+	margin: 0 0 16px;
+}
+
+/* ==========================================================================
+   Field Group
+   ========================================================================== */
+
+.wp-connector-row__field-group {
+	margin-bottom: 12px;
+}
+
+.wp-connector-row__label {
+	display: block;
+	font-size: 13px;
+	font-weight: 600;
+	color: #1d2327;
+	margin-bottom: 6px;
+}
+
+.wp-connector-row__input {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	padding: 6px 10px;
+	font-size: 14px;
+	line-height: 1.5;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	background: #fff;
+	color: #2c3338;
+	box-sizing: border-box;
+	transition: border-color 0.15s ease;
+}
+
+.wp-connector-row__input:focus {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+	outline: 0;
+}
+
+.wp-connector-row__help {
+	font-size: 12px;
+	color: #787c82;
+	line-height: 1.5;
+	margin: 6px 0 0;
+}
+
+.wp-connector-row__help a {
+	color: #2271b1;
+	text-decoration: none;
+}
+
+.wp-connector-row__help a:hover {
+	color: #135e96;
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   Masked Key (Connected State)
+   ========================================================================== */
+
+.wp-connector-row__masked-key {
+	font-size: 14px;
+	color: #50575e;
+	letter-spacing: 2px;
+	padding: 6px 0;
+}
+
+/* ==========================================================================
+   Actions (Save, Replace, Disconnect)
+   ========================================================================== */
+
+.wp-connector-row__actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 4px;
+}
+
+.wp-connector-row__save {
+	min-width: 80px;
+}
+
+.wp-connector-row__save:disabled {
+	opacity: 0.7;
+	cursor: default;
+}
+
+.wp-connector-row__spinner {
+	float: none;
+	margin: 0;
+}
+
+.wp-connector-row__replace {
+	font-size: 13px;
+	color: #2271b1;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.wp-connector-row__replace:hover {
+	color: #135e96;
+	text-decoration: underline;
+}
+
+.wp-connector-row__disconnect {
+	font-size: 13px;
+	color: #b32d2e;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.wp-connector-row__disconnect:hover {
+	color: #8a2424;
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   Connected Row Accent
+   ========================================================================== */
+
+.wp-connector-row.is-expanded .wp-connector-row__header {
+	background-color: #f6f7f7;
+}
+
+/* Subtle left accent for expanded row */
+.wp-connector-row.is-expanded {
+	box-shadow: inset 3px 0 0 #2271b1;
+}
