@@ -345,7 +345,7 @@
 	border-radius: 4px;
 	padding: 8px 12px;
 	font-size: 14px;
-	font-family: inherit;
+	font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 	line-height: 1.4;
 	color: #1e1e1e;
 	background: #fff;
@@ -422,7 +422,6 @@
 
 .wp-connectors-frame .action-remove {
 	color: #d63638;
-	margin-top: 16px;
 	display: inline-block;
 }
 
