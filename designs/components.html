@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components — Connectors</title>
+  <link rel="stylesheet" href="css/wp-admin.css">
+  <link rel="stylesheet" href="css/connectors.css">
+  <style>
+    /* Component page layout — sits inside the white frame */
+    .components-page {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .component-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .component-section__title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #757575;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .component-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .component-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .component-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #949494;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* Override state visibility for components page — show everything inline */
+    .components-page .action-install,
+    .components-page .action-installing,
+    .components-page .action-activate,
+    .components-page .action-connect,
+    .components-page .action-cancel,
+    .components-page .action-connected-label,
+    .components-page .action-edit,
+    .components-page .action-save,
+    .components-page .action-remove {
+      display: inline-flex !important;
+    }
+
+    .components-page .connector-card__body {
+      display: block !important;
+    }
+
+    /* Card demos need constrained width */
+    .component-card-demo {
+      max-width: 820px;
+    }
+
+    /* Body demos need constrained width */
+    .component-body-demo {
+      max-width: 560px;
+    }
+
+    /* Inline icons row */
+    .component-icons {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .component-icons img {
+      width: 48px;
+      height: 48px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Adminbar -->
+  <div id="wpadminbar"></div>
+
+  <!-- Sidebar -->
+  <div id="adminmenuwrap"></div>
+
+  <!-- Content -->
+  <div id="wpcontent">
+    <div class="wp-connectors-frame">
+
+      <h1 class="connectors-title">Components</h1>
+      <p class="connectors-subtitle">All UI components used to compose the Connectors screen.</p>
+      <hr class="connectors-separator">
+
+      <div class="components-page">
+
+        <!-- ============================================================
+             Icons
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Service Icons</div>
+          <div class="component-icons">
+            <div class="component-item">
+              <span class="component-label">OpenAI</span>
+              <img src="openai.png" alt="OpenAI">
+            </div>
+            <div class="component-item">
+              <span class="component-label">Claude</span>
+              <img src="claude.png" alt="Claude">
+            </div>
+            <div class="component-item">
+              <span class="component-label">Gemini</span>
+              <img src="google.png" alt="Gemini">
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Buttons
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Buttons</div>
+
+          <div class="component-row">
+            <div class="component-item">
+              <span class="component-label">Install</span>
+              <button class="action-install">Install</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Installing</span>
+              <button class="action-installing">Installing...</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Activate</span>
+              <button class="action-activate">Activate</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Connect</span>
+              <button class="action-connect">Connect</button>
+            </div>
+          </div>
+
+          <div class="component-row">
+            <div class="component-item">
+              <span class="component-label">Save (primary)</span>
+              <button class="action-save">Save</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Cancel</span>
+              <button class="action-cancel">Cancel</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Edit</span>
+              <button class="action-edit">Edit</button>
+            </div>
+            <div class="component-item">
+              <span class="component-label">Remove and replace</span>
+              <button class="action-remove">Remove and replace</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Status
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Status</div>
+          <div class="component-row">
+            <div class="component-item">
+              <span class="component-label">Connected</span>
+              <span class="action-connected-label">Connected</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Form Fields
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Form Fields</div>
+
+          <div class="component-body-demo">
+            <div class="component-item" style="width: 100%;">
+              <span class="component-label">Label</span>
+              <label class="field-label">API Key</label>
+            </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 16px;">
+              <span class="component-label">Input (empty)</span>
+              <input class="field-input" type="text" placeholder="YOUR_API_KEY">
+            </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 16px;">
+              <span class="component-label">Input (masked / read-only)</span>
+              <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly style="background: #f0f0f0; color: #757575;">
+            </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 16px;">
+              <span class="component-label">Help text</span>
+              <p class="field-help">Get your API key at <a href="#">platform.openai.com</a></p>
+            </div>
+
+            <div class="component-item" style="width: 100%; margin-top: 8px;">
+              <span class="component-label">Help text (secret)</span>
+              <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="#">platform.openai.com</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Card — Header
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Card / Header</div>
+
+          <div class="component-card-demo">
+            <div class="component-item" style="width: 100%; margin-bottom: 8px;">
+              <span class="component-label">Default (not installed)</span>
+            </div>
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <button class="action-install">Install</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="component-card-demo">
+            <div class="component-item" style="width: 100%; margin-bottom: 8px;">
+              <span class="component-label">Connected</span>
+            </div>
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <span class="action-connected-label">Connected</span>
+                  <button class="action-edit">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Card — Body / Setup
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Card / Body — Setup</div>
+
+          <div class="component-card-demo">
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <button class="action-cancel">Cancel</button>
+                </div>
+              </div>
+              <div class="connector-card__body connector-card__body--setup">
+                <label class="field-label">API Key</label>
+                <input class="field-input" type="text" placeholder="YOUR_API_KEY">
+                <p class="field-help">Get your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+                <button class="action-save">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================
+             Card — Body / Edit
+             ============================================================ -->
+        <div class="component-section">
+          <div class="component-section__title">Card / Body — Edit</div>
+
+          <div class="component-card-demo">
+            <div class="connector-card">
+              <div class="connector-card__header">
+                <div class="connector-card__icon">
+                  <img src="openai.png" alt="OpenAI">
+                </div>
+                <div class="connector-card__text">
+                  <div class="connector-card__name">OpenAI</div>
+                  <p class="connector-card__description">Text, image, and code generation with GPT and DALL-E.</p>
+                </div>
+                <div class="connector-card__actions">
+                  <button class="action-cancel">Cancel</button>
+                </div>
+              </div>
+              <div class="connector-card__body connector-card__body--edit">
+                <label class="field-label">API Key</label>
+                <input class="field-input" type="text" value="••••••••••••••••••••••••fj39d" readonly>
+                <p class="field-help">Your API key is a secret, and we only show the last few characters. You can reset your API key at <a href="https://platform.openai.com/api-keys">platform.openai.com</a></p>
+                <button class="action-remove">Remove and replace</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
