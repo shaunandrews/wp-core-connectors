@@ -1,0 +1,378 @@
+/**
+ * Content Guidelines — All Styles
+ *
+ * wp-admin chrome (adminbar, sidebar, content frame) +
+ * Content Guidelines page components (guideline cards, actions).
+ *
+ * All component styles scoped inside .wp-guidelines-frame.
+ */
+
+
+/* ================================================================
+   Reset & base
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-size: 13px;
+	line-height: 1.4em;
+	color: #3c434a;
+	background: #1e1e1e;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ================================================================
+   wp-admin chrome — adminbar, sidebar, content area
+   ================================================================ */
+
+#wpadminbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 99999;
+	height: 32px;
+	background: #1d2327;
+}
+
+#adminmenuwrap {
+	position: fixed;
+	top: 32px;
+	left: 0;
+	bottom: 0;
+	width: 160px;
+	z-index: 9990;
+	background: #1d2327;
+}
+
+#wpcontent {
+	margin-left: 160px;
+	margin-top: 32px;
+	height: calc(100vh - 16px);
+	background: #1e1e1e;
+	padding: 0 8px 8px 0;
+}
+
+.wp-guidelines-frame {
+	background: #ffffff;
+	border-radius: 8px;
+	min-height: calc(100vh - 32px - 8px);
+	padding: 0;
+	position: relative;
+}
+
+
+/* ================================================================
+   Page header
+   ================================================================ */
+
+.wp-guidelines-frame .guidelines-header {
+	padding: 16px 24px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.wp-guidelines-frame .guidelines-title {
+	font-size: 24px;
+	font-weight: 400;
+	color: #1e1e1e;
+	margin: 0 0 8px;
+	line-height: 1.3;
+}
+
+.wp-guidelines-frame .guidelines-subtitle {
+	font-size: 13px;
+	color: #757575;
+	/* max-width: 560px; */
+	margin: 0;
+	line-height: 1.5;
+}
+
+.wp-guidelines-frame .guidelines-body {
+	padding: 24px;
+}
+
+
+/* ================================================================
+   Guideline list + card
+   ================================================================ */
+
+.wp-guidelines-frame .guidelines-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	max-width: 680px;
+	margin: 0 auto;
+}
+
+.wp-guidelines-frame .guideline-card {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 20px;
+	transition: border-color 0.15s ease;
+}
+
+.wp-guidelines-frame .guideline-card:hover {
+	border-color: #c0c0c0;
+}
+
+
+/* Card header — clickable row */
+
+.wp-guidelines-frame .guideline-card__header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	cursor: pointer;
+	user-select: none;
+}
+
+
+/* Card icon */
+
+.wp-guidelines-frame .guideline-card__icon {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f6f6f6;
+	border-radius: 2px;
+	color: #757575;
+}
+
+.wp-guidelines-frame .guideline-card__icon svg {
+	fill: #757575;
+}
+
+
+/* Card text */
+
+.wp-guidelines-frame .guideline-card__text {
+	flex: 1;
+	min-width: 0;
+}
+
+.wp-guidelines-frame .guideline-card__name {
+	font-size: 15px;
+	font-weight: 600;
+	color: #1e1e1e;
+	line-height: 1.3;
+	margin: 0 0 2px;
+}
+
+.wp-guidelines-frame .guideline-card__description {
+	font-size: 12px;
+	color: #757575;
+	line-height: 1.4;
+	margin: 0;
+}
+
+
+/* Card chevron — down when closed, up when open */
+
+.wp-guidelines-frame .guideline-card__chevron {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.wp-guidelines-frame .guideline-card__chevron svg {
+	fill: #949494;
+}
+
+.wp-guidelines-frame .guideline-card__chevron .chevron-up {
+	display: none;
+}
+
+.wp-guidelines-frame .guideline-card.is-open .guideline-card__chevron .chevron-down {
+	display: none;
+}
+
+.wp-guidelines-frame .guideline-card.is-open .guideline-card__chevron .chevron-up {
+	display: block;
+}
+
+
+/* ================================================================
+   Accordion collapse — grid row trick for smooth height animation
+   ================================================================ */
+
+.wp-guidelines-frame .guideline-card__collapse {
+	display: grid;
+	grid-template-rows: 0fr;
+}
+
+.wp-guidelines-frame .guideline-card.is-open .guideline-card__collapse {
+	grid-template-rows: 1fr;
+}
+
+.wp-guidelines-frame .guideline-card__body {
+	overflow: hidden;
+}
+
+.wp-guidelines-frame .guideline-card.is-open .guideline-card__body {
+	padding-top: 16px;
+}
+
+
+/* Help text */
+
+.wp-guidelines-frame .guideline-card__help {
+	font-size: 13px;
+	color: #757575;
+	line-height: 1.5;
+	margin: 8px 0 0;
+}
+
+
+/* Textarea */
+
+.wp-guidelines-frame .guideline-card__textarea {
+	display: block;
+	width: 100%;
+	min-height: 120px;
+	border: 1px solid #949494;
+	border-radius: 2px;
+	padding: 10px 12px;
+	font-size: 14px;
+	font-family: inherit;
+	line-height: 1.5;
+	color: #1e1e1e;
+	background: #fff;
+	outline: none;
+	resize: vertical;
+	transition: border-color 0.15s ease;
+}
+
+.wp-guidelines-frame .guideline-card__textarea::placeholder {
+	color: #949494;
+}
+
+.wp-guidelines-frame .guideline-card__textarea:focus {
+	border-color: #3858E9;
+	box-shadow: 0 0 0 1px #3858E9;
+}
+
+
+/* Save button — filled (primary) */
+
+.wp-guidelines-frame .guideline-card__save {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: #3858E9;
+	color: #fff;
+	border: none;
+	border-radius: 2px;
+	padding: 6px 16px;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: inherit;
+	line-height: 1.4;
+	cursor: pointer;
+	margin-top: 12px;
+	transition: background-color 0.15s ease;
+}
+
+.wp-guidelines-frame .guideline-card__save:hover {
+	background: #2C47C2;
+}
+
+
+/* ================================================================
+   Actions section
+   ================================================================ */
+
+.wp-guidelines-frame .guidelines-actions {
+	max-width: 680px;
+	margin: 32px auto 0;
+}
+
+.wp-guidelines-frame .guidelines-actions__title {
+	font-size: 13px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 0 0 12px;
+}
+
+.wp-guidelines-frame .guidelines-actions__card {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 0 20px;
+}
+
+.wp-guidelines-frame .guidelines-actions__row {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 16px 0;
+}
+
+.wp-guidelines-frame .guidelines-actions__text {
+	flex: 1;
+	min-width: 0;
+}
+
+.wp-guidelines-frame .guidelines-actions__name {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1e1e1e;
+	line-height: 1.3;
+	margin: 0 0 2px;
+}
+
+.wp-guidelines-frame .guidelines-actions__description {
+	font-size: 12px;
+	color: #757575;
+	line-height: 1.4;
+	margin: 0;
+}
+
+.wp-guidelines-frame .guidelines-actions__divider {
+	height: 1px;
+	background: #e0e0e0;
+}
+
+
+/* ================================================================
+   Outlined button (Upload, Download, View history)
+   ================================================================ */
+
+.wp-guidelines-frame .action-outlined {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #3858E9;
+	background: transparent;
+	border-radius: 2px;
+	padding: 6px 16px;
+	color: #3858E9;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: inherit;
+	line-height: 1.4;
+	cursor: pointer;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: background-color 0.15s ease;
+	flex-shrink: 0;
+}
+
+.wp-guidelines-frame .action-outlined:hover {
+	background: rgba(56, 88, 233, 0.08);
+}
