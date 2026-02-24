@@ -94,7 +94,7 @@ body {
 .wp-connectors-frame .connectors-subtitle {
 	font-size: 13px;
 	color: #757575;
-	max-width: 560px;
+	/* max-width: 560px; */
 	margin: 0;
 	line-height: 1.5;
 }
