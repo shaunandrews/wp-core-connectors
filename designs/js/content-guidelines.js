@@ -36,4 +36,20 @@
 			card.classList.add( 'is-open' );
 		}
 	} );
+
+	// History screen toggle
+	var btnViewHistory = document.getElementById( 'btn-view-history' );
+	var btnHistoryBack = document.getElementById( 'btn-history-back' );
+
+	if ( btnViewHistory ) {
+		btnViewHistory.addEventListener( 'click', function() {
+			frame.classList.add( 'is-history' );
+		} );
+	}
+
+	if ( btnHistoryBack ) {
+		btnHistoryBack.addEventListener( 'click', function() {
+			frame.classList.remove( 'is-history' );
+		} );
+	}
 } )();

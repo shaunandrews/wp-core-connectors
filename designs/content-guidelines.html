@@ -247,12 +247,54 @@
                 <div class="guidelines-actions__name">Revert</div>
                 <p class="guidelines-actions__description">Use a previous version of your content guidelines.</p>
               </div>
-              <button class="action-outlined">View history</button>
+              <button class="action-outlined" id="btn-view-history">View history</button>
             </div>
           </div>
         </div>
 
       </div>
+
+      <!-- History screen -->
+      <div class="guidelines-history" id="guidelines-history">
+        <div class="guidelines-body">
+          <div class="history-content">
+            <div class="history-back" id="btn-history-back">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M14.6 7l-1.2-1L8 12l5.4 6 1.2-1-4.6-5z" /></svg>
+              <span class="history-back__title">Revision history</span>
+            </div>
+            <p class="history-subtitle">Use a previous version of your content guidelines.</p>
+
+            <div class="history-table">
+              <div class="history-table__head">
+                <span class="history-table__col-date">Date</span>
+                <span class="history-table__col-user">User</span>
+                <span class="history-table__col-action">Action</span>
+              </div>
+              <div class="history-table__row">
+                <span class="history-table__col-date">Feb 22, 2026 at 8:15 pm</span>
+                <span class="history-table__col-user">Jane Smith</span>
+                <span class="history-table__col-action"><button class="btn-text history-restore">Restore</button></span>
+              </div>
+              <div class="history-table__row">
+                <span class="history-table__col-date">Feb 19, 2026 at 8:15 pm</span>
+                <span class="history-table__col-user">John Doe</span>
+                <span class="history-table__col-action"><button class="btn-text history-restore">Restore</button></span>
+              </div>
+              <div class="history-table__row">
+                <span class="history-table__col-date">Feb 17, 2026 at 8:15 pm</span>
+                <span class="history-table__col-user">Admin User</span>
+                <span class="history-table__col-action"><button class="btn-text history-restore">Restore</button></span>
+              </div>
+              <div class="history-table__row">
+                <span class="history-table__col-date">Feb 10, 2026 at 8:15 pm</span>
+                <span class="history-table__col-user">Sarah Johnson</span>
+                <span class="history-table__col-action"><button class="btn-text history-restore">Restore</button></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
